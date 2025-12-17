@@ -97,7 +97,7 @@ def google_callback():
     client_id = os.getenv("GOOGLE_CLIENT_ID") or API_CLIENT_ID
     client_secret = os.getenv("GOOGLE_CLIENT_SECRET") or API_CLIENT_SECRET
     redirect_uri = os.environ.get("GOOGLE_REDIRECT_URI", "http://127.0.0.1:5000/auth/google/callback")
-    frontend_url = os.environ.get("FRONTEND_URL", "http://127.0.0.1:5173")
+    frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
     if not client_id or not client_secret:
         return jsonify({"error": "Google OAuth not configured (client id/secret)"}), 500

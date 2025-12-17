@@ -25,9 +25,11 @@ function VerifyForm() {
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({
-          text: inputValue,
-        }),
+        body: JSON.stringify(
+          selected === "URL"
+            ? { url: inputValue }
+            : { text: inputValue }
+        ),
       });
 
       const data = await response.json();
@@ -41,7 +43,7 @@ function VerifyForm() {
           label: data.prediction || (confidence >= 0.5 ? "REAL" : "FAKE"),
           real_probability: data.prediction === "REAL" ? confidence : 1 - confidence,
           fake_probability: data.prediction === "FAKE" ? confidence : 1 - confidence,
-          content: inputValue,
+          content: data.content || inputValue,
           category: data.prediction || null,
           raw: data,
         };
