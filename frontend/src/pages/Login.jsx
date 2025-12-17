@@ -54,6 +54,29 @@ const Login = () => {
     }
   };
 
+  // If redirected back from Google OAuth, capture token from URL
+  React.useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const access_token = params.get("access_token");
+      const email = params.get("email");
+      const name = params.get("name");
+      if (access_token) {
+        localStorage.setItem("access_token", access_token);
+        if (email || name) {
+          const user = { full_name: name || email, email };
+          localStorage.setItem("user", JSON.stringify(user));
+        }
+        // Clean url to avoid duplicate handling
+        window.history.replaceState({}, document.title, window.location.pathname);
+        // Navigate to verify page
+        navigate("/verify");
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [navigate]);
+
   return (
     <div className="login-page">
       <div className="login-container">
@@ -102,7 +125,11 @@ const Login = () => {
           </button>
 
           {/* Google Login Button (UI only for now) */}
-          <button type="button" className="btn login-secondary-btn">
+          <button
+            type="button"
+            className="btn login-secondary-btn"
+            onClick={() => window.open("http://127.0.0.1:5000/auth/google/login", "_blank", "noopener,noreferrer")}
+          >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google logo"
