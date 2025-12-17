@@ -19,23 +19,37 @@ function VerifyForm() {
 
     try {
       const token = localStorage.getItem("access_token") || localStorage.getItem("token");
-      const response = await fetch("http://127.0.0.1:5000/verify", {
+      const response = await fetch("http://127.0.0.1:5000/verify/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({
-          type: selected,
-          value: inputValue,
+          text: inputValue,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setScore(data.confidence);
-        setResult(data);
+        // Backend returns { prediction: "REAL"|"FAKE", confidence: 0.0-1.0 }
+        const confidence = typeof data.confidence === "number" ? data.confidence : parseFloat(data.confidence) || 0;
+
+        // Build a result object compatible with VerificationResult expectations
+        const mappedResult = {
+          label: data.prediction || (confidence >= 0.5 ? "REAL" : "FAKE"),
+          real_probability: data.prediction === "REAL" ? confidence : 1 - confidence,
+          fake_probability: data.prediction === "FAKE" ? confidence : 1 - confidence,
+          content: inputValue,
+          category: data.prediction || null,
+          raw: data,
+        };
+
+        const scorePercent = Math.round(confidence * 100);
+
+        setScore(scorePercent);
+        setResult(mappedResult);
         setShowResult(true);
       } else {
         alert(data.error || "Verification failed");
