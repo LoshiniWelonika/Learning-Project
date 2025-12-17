@@ -1,0 +1,29 @@
+import React from 'react';
+import { Routes, Route } from "react-router-dom";
+import PrivateRoute from './components/PrivateRoute';
+
+// Pages
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import About from './pages/About';
+import VerifyPage from './pages/VerifyPage';
+import FAQ from './pages/FAQ';
+import History from './pages/History';
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} /> 
+      <Route path="/register" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/verify" element={<PrivateRoute><VerifyPage /></PrivateRoute>} />
+      <Route path="/faq" element={<FAQ />} />
+      <Route path="/history" element={<PrivateRoute><History /></PrivateRoute>} />
+    </Routes>
+  );
+}
+
+export default App;

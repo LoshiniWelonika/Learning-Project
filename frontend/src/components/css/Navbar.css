@@ -1,0 +1,141 @@
+.navbar {
+  background-color: #000;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100px;
+  display: flex;
+  align-items: space-between;
+  justify-content: center;
+}
+
+/* Main flex container: three equal zones */
+.navbar-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* logo | links | buttons */
+  align-items: center;
+  padding: 30px 40px;
+}
+
+/* Left: Logo */
+.navbar-logo img {
+  height: 70px;
+  width: auto;
+  justify-self: start;
+}
+
+/* Center: Navigation Links */
+.navbar-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-left: 80px;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  background-color: #737373;
+}
+
+/* Right: Buttons */
+.navbar-buttons {
+  display: flex;
+  gap: 5px;
+  margin-left: 130px;
+}
+
+/* Avatar circle shown when logged in */
+.avatar-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #69A1A2; 
+  color: #000; 
+  font-weight: 700;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 9999px; /* pill/circle */
+  min-width: 40px;
+  min-height: 40px;
+  line-height: 1;
+  white-space: nowrap;
+} 
+
+.loginbtn {
+  border: 1px solid #69A1A2;
+  color: #fff;
+  background: transparent;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginbtn:hover {
+  background-color: #69A1A2;
+  color: #000;
+}
+
+.signUpbtn {
+  background-color: #69A1A2;
+  padding: 8px 16px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signUpbtn:hover {
+  background-color: #00d7b8;
+  color: #000;
+}
+
+/* Logout button (shown when logged in) */
+.logoutbtn {
+  border: 1px solid #69A1A2;
+  color: #fff;
+  background: transparent;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutbtn:hover {
+  background-color: #69A1A2;
+  color: #000;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .navbar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-buttons {
+    justify-content: center;
+  }
+}

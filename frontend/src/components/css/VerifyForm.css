@@ -1,0 +1,52 @@
+.formCard {
+    border: #D1CACA solid 1px;
+    border-radius: 10px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 50px;
+    width: 800px;
+    background-color: #FFFBFB;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 50px;
+}
+
+.formCard p{
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.formCard a{
+    border: #D1CACA solid 1px;
+    border-radius: 10px;
+}
+
+.verifySection label{
+    text-align: left;
+    padding-top: 40px;
+    padding-bottom: 15px;
+    color: #121111;
+}
+
+.verifySection input{
+    border: #C1C4C8 solid 1px;
+    border-radius: 10px;
+    padding: 15px;
+    width: 90%;
+    outline: none;
+}
+
+.verifySection button{
+    background-color: #69A1A2;
+    border: #758294 solid 1px;
+    color: white;
+    font-weight: bold;
+    width: 200px;
+}
+
+textarea{
+    border: #C1C4C8 solid 1px;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+

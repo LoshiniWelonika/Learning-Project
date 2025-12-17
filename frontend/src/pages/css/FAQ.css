@@ -1,0 +1,277 @@
+/* ================================
+   GLOBAL ABOUT PAGE STYLES
+================================ */
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  color: #111;
+}
+
+/* ================================
+   FAQ HEADER SECTION
+================================ */
+
+.faq-header {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 80px 30px;
+}
+
+.faq-header h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.faq-header p {
+  font-size: 20px;
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ---------- MAIN CATEGORY ACCORDION ---------- */
+.faq-category {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  background-color: #AFAFAF;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  font-weight: 500;
+}
+
+.faq-category + .faq-category {
+  margin-top: 25px;
+}
+
+.faq-category .accordion-item {
+  border: none;
+}
+
+.faq-category .accordion-button {
+  background-color: #f9f9f9;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  padding: 18px 24px;
+  color: #222;
+  box-shadow: none !important;
+}
+
+.faq-category .accordion-button:not(.collapsed) {
+  background-color: #e7f1f0;
+  color: #0f3c3b;
+}
+
+.faq-category .accordion-body {
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-top: 1px solid #e6e6e6;
+}
+
+/* ---------- NESTED ACCORDION (Inside General Questions) ---------- */
+.faq-category .accordion-body .accordion {
+  margin-top: 10px;
+}
+
+.faq-category .accordion-body .accordion-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.faq-category .accordion-body .accordion-button {
+  background-color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+  padding: 14px 20px;
+}
+
+.faq-category .accordion-body .accordion-button:not(.collapsed) {
+  background-color: #f5f9f9;
+  color: #0f3c3b;
+  border-bottom: 1px solid #ddd;
+}
+
+.faq-category .accordion-body .accordion-body {
+  padding: 16px 24px;
+  background-color: #fff;
+  font-size: 0.95rem;
+  color: #6c6a6a;
+  line-height: 1.6;
+}
+
+/* ================================
+   FAQ CATEGORY SECTION
+================================ */
+
+.faq-category {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.faq-category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  background: #f9f9f9;
+  border-bottom: 1px solid #e5e5e5;
+  transition: background 0.2s ease;
+}
+
+.faq-category-header:hover {
+  background: #f1f1f1;
+}
+
+.faq-items {
+  padding: 10px 0;
+}
+
+/* ================================
+   FAQ ITEM SECTION
+================================ */
+
+.faq-item {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px 20px;
+  transition: background 0.2s ease;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.faq-question p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.faq-answer {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ================================
+   CONTACT FORM SECTION
+================================ */
+
+/* Container */
+.contact-form-container {
+  background-color: #69A1A2;
+  color: #fff;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Inner content box */
+.contact-form-content {
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+}
+
+/* Heading */
+.contact-form-content h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Input fields */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  color: #AFAFAF;
+}
+
+/* Placeholder color */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #999;
+}
+
+/* Textarea */
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Submit button */
+.contact-form button {
+  background-color: #326C6D;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: fit-content;
+  margin: 20px auto 0;
+  transition: all 0.3s ease;
+  border-color: #fff;
+}
+
+.contact-form button:hover {
+  background-color: #AFAFAF;
+  color: black;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .faq-form-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.95rem;
+  }
+
+  .contact-form-container {
+    padding: 40px 15px;
+  }
+}

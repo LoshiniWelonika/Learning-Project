@@ -1,0 +1,218 @@
+/* Basic Reset and Full Height Setup */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Page Layout */
+.login-page {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+  min-height: 100vh; 
+  width: 100%;
+  margin: 0;
+  padding: 40px 20px; 
+}
+
+/* Login Container (White Card) */
+.login-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  margin: 0 auto; /* ensure horizontal centering fallback */
+}
+
+/* Header */
+.login-header {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 30px;
+}
+
+/* Input Groups */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #555555;
+}
+
+/* Input Field Container */
+.input-field-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: border-color 0.3s;
+}
+
+.input-field-container:focus-within {
+  border-color: #639c94;
+}
+
+.input-field-container i {
+  color: #aaaaaa;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  flex-grow: 1;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #333333;
+  outline: none;
+}
+
+input::placeholder {
+  color: #aaaaaa;
+  font-weight: 400;
+}
+
+/* Forgot Password */
+a {
+  text-decoration: none;
+}
+
+.forgot-password {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #69a1a2;
+  margin-bottom: 25px;
+  transition: color 0.2s;
+}
+
+.forgot-password:hover {
+  color: #4a7771;
+}
+
+/* Buttons */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; 
+}
+
+.login-container .btn {
+  width: 100%;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+}
+
+/* Primary Button */
+.login-primary-btn {
+  background-color: #79aea5;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(121, 174, 165, 0.4);
+}
+
+.login-primary-btn:hover {
+  background-color: #639c94;
+}
+
+/* Secondary Button (Google) */
+.login-secondary-btn {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #cccccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.login-secondary-btn:hover {
+  background-color: #eeebeb;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* Signup Text */
+.signup-text {
+  font-size: 0.95rem;
+  color: #555555;
+  margin-top: 20px;
+}
+
+.signup-link {
+  color: #639c94;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.signup-link:hover {
+  color: #4a7771;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+
+  .login-header {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 12px 18px;
+  }
+}
