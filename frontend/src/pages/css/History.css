@@ -1,13 +1,13 @@
 /* ---------- PAGE ---------- */
 .history-page {
-  background-color: #f5f6f7;
+  background-color: #e9ecef;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .history-container {
-  max-width: 900px;
+  width: 700px;
   margin: 40px auto;
   background: white;
   border-radius: 10px;
