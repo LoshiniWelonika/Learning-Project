@@ -177,7 +177,7 @@ def google_callback():
     return redirect(redirect_to)
 
 
-@auth_bp.route("/admin/dashboard", methods=["GET"])
+@auth_bp.route("/admin", methods=["GET"])
 @jwt_required()
 def admin_dashboard():
     """Return simple admin dashboard stats. Accessible only to Admin user or users with is_admin flag."""

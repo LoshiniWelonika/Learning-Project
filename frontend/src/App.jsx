@@ -10,6 +10,11 @@ import About from './pages/About';
 import VerifyPage from './pages/VerifyPage';
 import FAQ from './pages/FAQ';
 import History from './pages/History';
+import AdminLayout from './admin/layout/AdminLayout';
+import Dashboard from './admin/pages/Dashboard';
+import Users from './admin/pages/Users';
+import Reports from './admin/pages/Reports';
+import Settings from './admin/pages/Settings';
 
 function App() {
   return (
@@ -20,6 +25,13 @@ function App() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/about" element={<About />} />
       <Route path="/verify" element={<PrivateRoute><VerifyPage /></PrivateRoute>} />
+      <Route path="/admin" element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
+        <Route index element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="users" element={<Users />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
       <Route path="/faq" element={<FAQ />} />
       <Route path="/history" element={<PrivateRoute><History /></PrivateRoute>} />
     </Routes>
