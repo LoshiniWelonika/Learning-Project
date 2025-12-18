@@ -1,9 +1,9 @@
 :root {
   --bg-main: #0f172a; /* dark slate */
   --bg-soft: #0b1220; /* slightly lighter */
-  --text-main: #e6eef8;
-  --text-muted: #9aa6b2;
-  --primary: #38bdf8;
+  --text-main: #e7ecf3;
+  --text-muted: #7a7e82;
+  --primary: #109f7b;
   --primary-dark: #0ea5c9;
   --border-soft: rgba(255,255,255,0.06);
   --bg-hover: rgba(255,255,255,0.02);
@@ -95,6 +95,11 @@
 .table th {
   background: var(--bg-main);
 }
+
+.table td {
+  background: var(--bg-soft);
+}
+
 .table tr:hover {
   background: var(--bg-hover);
 }

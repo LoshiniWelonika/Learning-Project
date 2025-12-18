@@ -46,3 +46,41 @@ def stats():
     except Exception:
         current_app.logger.exception("Failed to build admin stats")
         return jsonify({"error": "Failed to fetch admin stats"}), 500
+
+
+@admin_bp.route("/users", methods=["GET"])
+@jwt_required()
+def users_list():
+    identity = get_jwt_identity()
+    if not _is_admin_identity(identity):
+        return jsonify({"error": "Forbidden"}), 403
+
+    try:
+        docs = users_collection.find()
+        users = []
+        for u in docs:
+            # count verifications linked to this user by email or username
+            try:
+                email = u.get("email")
+                name = u.get("full_name")
+                verified_count = verifications_collection.count_documents({
+                    "$or": [
+                        {"user_email": email},
+                        {"username": name}
+                    ]
+                })
+            except Exception:
+                current_app.logger.exception("Failed to count verifications for user")
+                verified_count = 0
+
+            users.append({
+                "id": str(u.get("_id")),
+                "full_name": u.get("full_name"),
+                "email": u.get("email"),
+                "is_admin": bool(u.get("is_admin", False)),
+                "verified_count": int(verified_count),
+            })
+        return jsonify({"users": users}), 200
+    except Exception:
+        current_app.logger.exception("Failed to fetch users list")
+        return jsonify({"error": "Failed to fetch users"}), 500
