@@ -19,7 +19,7 @@ function VerifyForm() {
 
     try {
       const token = localStorage.getItem("access_token") || localStorage.getItem("token");
-      const response = await fetch("http://127.0.0.1:5000/verify/predict", {
+      const response = await fetch("http://127.0.0.1:5001/verify/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

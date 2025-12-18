@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/auth/login", {
+      const response = await fetch("http://127.0.0.1:5001/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -132,7 +132,7 @@ const Login = () => {
           <button
             type="button"
             className="btn login-secondary-btn"
-            onClick={() => window.open("http://127.0.0.1:5000/auth/google/login", "_blank", "noopener,noreferrer")}
+            onClick={() => window.open("http://127.0.0.1:5001/auth/google/login", "_blank", "noopener,noreferrer")}
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
