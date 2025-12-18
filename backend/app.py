@@ -16,6 +16,7 @@ jwt = JWTManager(app)
 # Register blueprints
 from routes.auth_routes import auth_bp, bcrypt
 from routes.verify_routes import verify_bp
+from routes.admin_routes import admin_bp
 
 # Initialize extensions that require app context
 bcrypt.init_app(app)
@@ -25,6 +26,7 @@ app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(verify_bp, url_prefix="/verify")
 app.register_blueprint(faq_bp, url_prefix="/faq")
 app.register_blueprint(report_bp, url_prefix="/report")
+app.register_blueprint(admin_bp, url_prefix="/admin")
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5001, debug=True)

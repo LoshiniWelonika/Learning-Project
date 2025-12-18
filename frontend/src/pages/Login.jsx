@@ -44,7 +44,9 @@ const Login = () => {
           localStorage.setItem("user", JSON.stringify(data.user));
         }
 
-        navigate("/verify");
+        // Redirect admin users to admin dashboard
+        const isAdmin = (data.user && (data.user.is_admin || (data.user.email || "").toLowerCase() === "admin@gmail.com"));
+        navigate(isAdmin ? "/admin" : "/verify");
       } else {
         alert(`⚠️ ${data.error || "Login failed. Please try again."}`);
       }
@@ -66,11 +68,13 @@ const Login = () => {
         if (email || name) {
           const user = { full_name: name || email, email };
           localStorage.setItem("user", JSON.stringify(user));
+          const isAdminOAuth = (email || "").toLowerCase() === "admin@gmail.com";
+          window.history.replaceState({}, document.title, window.location.pathname);
+          navigate(isAdminOAuth ? "/admin" : "/verify");
+        } else {
+          window.history.replaceState({}, document.title, window.location.pathname);
+          navigate("/verify");
         }
-        // Clean url to avoid duplicate handling
-        window.history.replaceState({}, document.title, window.location.pathname);
-        // Navigate to verify page
-        navigate("/verify");
       }
     } catch (e) {
       // ignore

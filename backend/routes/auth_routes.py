@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app, redirect
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import create_access_token
-from models import users_collection
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from models import users_collection, verifications_collection
 import os
 import requests
 from urllib.parse import urlencode, quote_plus
@@ -10,8 +10,8 @@ from urllib.parse import urlencode, quote_plus
 try:
     from api_key import CLIENT_ID as API_CLIENT_ID, CLIENT_SECRET as API_CLIENT_SECRET
 except Exception:
-    API_CLIENT_ID = "921182310953-kt6kt1nhkt560c61gj5vsmrqfbsjfk5d.apps.googleusercontent.com"
-    API_CLIENT_SECRET = "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"
+    API_CLIENT_ID = None
+    API_CLIENT_SECRET = None
 
 bcrypt = Bcrypt()
 auth_bp = Blueprint("auth", __name__)
@@ -38,14 +38,25 @@ def signup():
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
-    data = request.get_json()
+    data = request.get_json() or {}
     email = data.get("email")
     password = data.get("password")
+    # Special-case Admin user (static credentials)
+    if email and isinstance(email, str) and email.lower() == "admin@gmail.com" and password == "admin123":
+        access_token = create_access_token(identity="admin@gmail.com")
+        return jsonify({
+            "message": "Login successful",
+            "access_token": access_token,
+            "user": {"full_name": "Admin", "email": "admin@gmail.com", "is_admin": True},
+        }), 200
 
-    user = users_collection.find_one({"email": email})
+    user = users_collection.find_one({"email": email}) if email else None
 
     if not user:
         return jsonify({"error": "User not found"}), 404
+
+    if not user.get("password"):
+        return jsonify({"error": "User has no local password; please use OAuth login"}), 401
 
     if not bcrypt.check_password_hash(user["password"], password):
         return jsonify({"error": "Invalid password"}), 401
@@ -164,3 +175,45 @@ def google_callback():
     }
     redirect_to = f"{frontend_url}/login?" + urlencode({k: (v or "") for k, v in params.items()})
     return redirect(redirect_to)
+
+
+@auth_bp.route("/admin", methods=["GET"])
+@jwt_required()
+def admin_dashboard():
+    """Return simple admin dashboard stats. Accessible only to Admin user or users with is_admin flag."""
+    identity = get_jwt_identity()
+    # identity may be 'admin@gmail.com' for static admin or an email
+    is_admin = False
+    if identity == "admin@gmail.com":
+        is_admin = True
+    else:
+        try:
+            user = users_collection.find_one({"email": identity})
+            if user and user.get("is_admin"):
+                is_admin = True
+        except Exception:
+            pass
+
+    if not is_admin:
+        return jsonify({"error": "Forbidden"}), 403
+
+    try:
+        users_count = users_collection.count_documents({})
+        verifications_count = verifications_collection.count_documents({})
+        recent = []
+        docs = verifications_collection.find().sort("created_at", -1).limit(10)
+        for d in docs:
+            recent.append({
+                "id": str(d.get("_id")),
+                "text": (d.get("text") or "")[:300],
+                "prediction": d.get("prediction"),
+                "confidence": float(d.get("confidence", 0)),
+                "username": d.get("username"),
+                "user_email": d.get("user_email"),
+                "created_at": d.get("created_at").isoformat() if d.get("created_at") else None,
+            })
+
+        return jsonify({"users_count": users_count, "verifications_count": verifications_count, "recent": recent}), 200
+    except Exception as e:
+        current_app.logger.exception("Failed to build admin dashboard")
+        return jsonify({"error": "Failed to fetch admin data"}), 500
