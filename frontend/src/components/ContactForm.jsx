@@ -15,7 +15,7 @@ function ContactForm() {
 
     try {
       // Send form data to backend
-      const res = await fetch("http://127.0.0.1:5001/faq/submit-question", {
+      const res = await fetch("http://127.0.0.1:5000/faq/submit-question", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, question }),

@@ -9,7 +9,6 @@ export default function Sidebar() {
         <NavLink to="/admin/dashboard">Dashboard</NavLink>
         <NavLink to="/admin/users">Users</NavLink>
         <NavLink to="/admin/reports">Reports</NavLink>
-        <NavLink to="/admin/settings">Settings</NavLink>
       </nav>
     </aside>
   );

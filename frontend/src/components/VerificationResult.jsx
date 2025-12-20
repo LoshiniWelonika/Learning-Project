@@ -90,7 +90,7 @@ function VerificationResult({
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5001/report/submit-report",
+        "http://127.0.0.1:5000/report/submit",
         {
           method: "POST",
           headers: {
